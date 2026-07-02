@@ -25,6 +25,10 @@ app.post("/books", (req, res)=> {
     }
 });
 
+app.get("/books", (req, res) => {
+    res.send(books);
+});
+
 
 const PORT = process.env.PORT || 3000;
 
