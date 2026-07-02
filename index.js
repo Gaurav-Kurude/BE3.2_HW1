@@ -10,6 +10,10 @@ const books = [
     { id: 2, title: 'To Kill a Mockingbird', author: 'Harper Lee', year: 1960 }
 ]
 
+const todos = [
+    { id: 1, title: 'Water the plants', day: 'Saturday' }
+]
+
 app.get("/", (req, res) => {
   res.send("Hello, Express server.");
 });
@@ -27,6 +31,20 @@ app.post("/books", (req, res)=> {
 
 app.get("/books", (req, res) => {
     res.send(books);
+});
+
+app.post("/todos", (req, res) => {
+    const newTodo = req.body;
+    if(!newTodo.title || !newTodo.day) {
+        res.status(400).json({ error: "Title and day are required" });
+    } else {
+        todos.push(newTodo);
+        res.status(201).json({ message: "Todo added successfully", todo: newTodo });    
+    }
+});
+
+app.get("/todos", (req, res) => {
+    res.send(todos);
 });
 
 
